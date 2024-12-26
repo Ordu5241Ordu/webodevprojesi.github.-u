@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .category-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .cart-item .btn-group {
+            display: flex;
+            gap: 5px;
+        }
+
+        .cart-item .btn {
+            margin: 0;
+        }
+
+        .price {
+            font-weight: bold;
+            color: green;
+        }
+
+        .total-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <h1 class="category-title">Masa Sipariş Sistemi</h1>
+
+        <div class="mb-3">
+            <label for="tableNumber" class="form-label">Masa Numarası:</label>
+            <input type="number" id="tableNumber" class="form-control" placeholder="Masa numarasını girin" onchange="updateCart()">
+        </div>
+
+        <ul id="cartItems" class="list-unstyled">
+            <!-- Sepet öğeleri burada listelenecek -->
+        </ul>
+
+        <p><strong>Toplam Tutar:</strong> <span id="cartTotal" class="total-price">0</span> TL</p>
+
+        <div class="text-center">
+            <button class="btn btn-danger" onclick="clearCart()">Sepeti Temizle</button>
+            <button class="btn btn-success" onclick="completeOrder()">Siparişi Tamamla</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Mevcut masa numarasını saklamak için bir değişken
+        let currentTable = null;
+
+        // Sepet öğelerini listeleme
+        function updateCart() {
+            const tableNumberElement = document.getElementById('tableNumber');
+            currentTable = tableNumberElement.value;
+
+            const cartItemsElement = document.getElementById('cartItems');
+            const cartTotalElement = document.getElementById('cartTotal');
+
+            cartItemsElement.innerHTML = ''; // Listeyi temizle
+            let cartTotal = 0;
+
+            if (!currentTable) {
+                cartTotalElement.textContent = '0 TL';
+                return;
+            }
+
+            // Mevcut masanın sepetini al
+            const cart = JSON.parse(localStorage.getItem(`cart_${currentTable}`)) || [];
+
+            // Sepetteki her öğe için HTML oluştur
+            if (cart.length === 0) {
+                cartTotalElement.textContent = '0 TL';
+            } else {
+                cart.forEach(item => {
+                    const li = document.createElement('li');
+                    li.classList.add('cart-item');
+                    const itemTotalPrice = item.price * item.quantity;
+
+                    li.innerHTML = `
+                            <div>
+                                ${item.name} (x${item.quantity})
+                                <span class="price">${itemTotalPrice} TL</span>
+                            </div>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-secondary" onclick="changeQuantity('${item.name}', -1)">-</button>
+                                <button class="btn btn-sm btn-primary" onclick="changeQuantity('${item.name}', 1)">+</button>
+                                <button class="btn btn-sm btn-danger" onclick="removeFromCart('${item.name}')">Çıkar</button>
+                            </div>
+                        `;
+                    cartItemsElement.appendChild(li);
+                    cartTotal += itemTotalPrice;
+                });
+                // Toplam tutarı güncelle
+                cartTotalElement.textContent = cartTotal + ' TL';
+            }
+        }
+
+        // Sepete öğe ekleme
+        function addToCart(item, price) {
+            if (!currentTable) {
+                alert('Lütfen önce masa numarasını girin!');
+                return;
+            }
+
+            // Fiyatı kontrol et
+            if (isNaN(price) || price <= 0) {
+                alert('Geçersiz fiyat!');
+                return;
+            }
+
+            // Masaya özel sepeti al
+            const cart = JSON.parse(localStorage.getItem(`cart_${currentTable}`)) || [];
+            const cartItemIndex = cart.findIndex(cartItem => cartItem.name === item);
+
+            if (cartItemIndex !== -1) {
+                // Eğer öğe zaten sepette varsa, miktarını artır
+                cart[cartItemIndex].quantity += 1;
+            } else {
+                // Eğer öğe sepette yoksa, yeni öğe ekle
+                const cartItem = { name: item, price: price, quantity: 1 };
+                cart.push(cartItem);
+            }
+
+            localStorage.setItem(`cart_${currentTable}`, JSON.stringify(cart));
+            alert(item + ' sepete eklendi!');
+            updateCart(); // Sepeti güncelle
+        }
+
+        // Sepetten öğe çıkarma
+        function removeFromCart(itemName) {
+            if (!currentTable) {
+                alert('Lütfen önce masa numarasını girin!');
+                return;
+            }
+
+            const cart = JSON.parse(localStorage.getItem(`cart_${currentTable}`)) || [];
+            const index = cart.findIndex(item => item.name === itemName);
+            if (index !== -1) {
+                cart.splice(index, 1);
+                localStorage.setItem(`cart_${currentTable}`, JSON.stringify(cart));
+                updateCart();
+            } else {
+                alert(itemName + ' sepette bulunamadı!');
+            }
+        }
+
+        // Sepetteki öğenin miktarını değiştirme
+        function changeQuantity(itemName, change) {
+            if (!currentTable) {
+                alert('Lütfen önce masa numarasını girin!');
+                return;
+            }
+
+            const cart = JSON.parse(localStorage.getItem(`cart_${currentTable}`)) || [];
+            const item = cart.find(item => item.name === itemName);
+
+            if (item) {
+                item.quantity += change;
+
+                // Miktar 1'den az olamaz
+                if (item.quantity < 1) {
+                    item.quantity = 1;
+                }
+
+                localStorage.setItem(`cart_${currentTable}`, JSON.stringify(cart));
+                updateCart();
+            }
+        }
+
+        // Tüm ürünleri silme
+        function clearCart() {
+            if (!currentTable) {
+                alert('Lütfen önce masa numarasını girin!');
+                return;
+            }
+
+            localStorage.setItem(`cart_${currentTable}`, JSON.stringify([]));
+            updateCart();
+        }
+
+        // Siparişi tamamlama
+        function completeOrder() {
+            if (!currentTable) {
+                alert('Lütfen önce masa numarasını girin!');
+                return;
+            }
+
+            const cart = JSON.parse(localStorage.getItem(`cart_${currentTable}`)) || [];
+            if (cart.length === 0) {
+                alert('Sepetiniz boş!');
+                return;
+            }
+
+            alert('Sipariş tamamlandı!');
+            clearCart();
+        }
+
+        // Sayfa yüklendiğinde sepetteki öğeleri güncelle
+        window.onload = updateCart;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,333 @@
+veritabanı bağlantı
+
+CREATE DATABASE yemek_sistemi;
+
+USE yemek_sistemi;
+
+CREATE TABLE admin (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE yemekler (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    kategori VARCHAR(50) NOT NULL,
+    isim VARCHAR(100) NOT NULL,
+    fiyat DECIMAL(10, 2) NOT NULL
+);
+
+-- Örnek admin kullanıcısı ekleme
+INSERT INTO admin (username, password) VALUES ('admin', MD5('123456'));
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+anasayfa:
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yemek Menüsü</title>
+</head>
+<body>
+    <h1>Yemek Menüsü</h1>
+    <form method="POST" action="">
+        <h2>Başlangıçlar</h2>
+        <input type="checkbox" name="menu[]" value="Mercimek Çorbası|40"> Mercimek Çorbası - 40₺ <br>
+        <input type="checkbox" name="menu[]" value="Ezogelin Çorbası|45"> Ezogelin Çorbası - 45₺ <br>
+        <input type="checkbox" name="menu[]" value="Mevsim Salata|50"> Mevsim Salata - 50₺ <br>
+
+        <h2>Ana Yemekler</h2>
+        <input type="checkbox" name="menu[]" value="Izgara Tavuk|100"> Izgara Tavuk - 100₺ <br>
+        <input type="checkbox" name="menu[]" value="Adana Kebap|120"> Adana Kebap - 120₺ <br>
+        <input type="checkbox" name="menu[]" value="Mantı|90"> Mantı - 90₺ <br>
+        <input type="checkbox" name="menu[]" value="Fırında Balık|130"> Fırında Balık - 130₺ <br>
+
+        <h2>İçecekler</h2>
+        <input type="checkbox" name="menu[]" value="Ayran|20"> Ayran - 20₺ <br>
+        <input type="checkbox" name="menu[]" value="Kola/Fanta|25"> Kola/Fanta - 25₺ <br>
+        <input type="checkbox" name="menu[]" value="Çay|15"> Çay - 15₺ <br>
+        <input type="checkbox" name="menu[]" value="Türk Kahvesi|30"> Türk Kahvesi - 30₺ <br>
+
+        <h2>Tatlılar</h2>
+        <input type="checkbox" name="menu[]" value="Baklava|50"> Baklava - 50₺ <br>
+        <input type="checkbox" name="menu[]" value="Künefe|60"> Künefe - 60₺ <br>
+        <input type="checkbox" name="menu[]" value="Sütlaç|40"> Sütlaç - 40₺ <br>
+
+        <h3>Masa Numarası</h3>
+        <input type="number" name="masa_no" placeholder="Masa No" required><br><br>
+
+        <input type="submit" name="submit" value="Siparişi Gönder">
+    </form>
+
+    <?php
+    if (isset($_POST['submit'])) {
+        $menu_items = $_POST['menu'];
+        $masa_no = $_POST['masa_no'];
+        $total_price = 0;
+
+        echo "<h2>Sipariş Özeti</h2>";
+        echo "<p><strong>Masa Numarası:</strong> $masa_no</p>";
+        echo "<ul>";
+        foreach ($menu_items as $item) {
+            list($name, $price) = explode('|', $item);
+            echo "<li>$name - $price₺</li>";
+            $total_price += $price;
+        }
+        echo "</ul>";
+        echo "<p><strong>Toplam Ücret:</strong> $total_price₺</p>";
+    }
+    ?>
+</body>
+</html>
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+müşteri sayfası:
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yemek Menüsü</title>
+</head>
+<body>
+    <h1>Yemek Menüsü</h1>
+    <form method="POST" action="asci.php">
+        <h2>Başlangıçlar</h2>
+        <input type="checkbox" name="menu[]" value="Mercimek Çorbası|40"> Mercimek Çorbası - 40₺ <br>
+        <input type="checkbox" name="menu[]" value="Ezogelin Çorbası|45"> Ezogelin Çorbası - 45₺ <br>
+        <input type="checkbox" name="menu[]" value="Mevsim Salata|50"> Mevsim Salata - 50₺ <br>
+
+        <h2>Ana Yemekler</h2>
+        <input type="checkbox" name="menu[]" value="Izgara Tavuk|100"> Izgara Tavuk - 100₺ <br>
+        <input type="checkbox" name="menu[]" value="Adana Kebap|120"> Adana Kebap - 120₺ <br>
+        <input type="checkbox" name="menu[]" value="Mantı|90"> Mantı - 90₺ <br>
+        <input type="checkbox" name="menu[]" value="Fırında Balık|130"> Fırında Balık - 130₺ <br>
+
+        <h2>İçecekler</h2>
+        <input type="checkbox" name="menu[]" value="Ayran|20"> Ayran - 20₺ <br>
+        <input type="checkbox" name="menu[]" value="Kola/Fanta|25"> Kola/Fanta - 25₺ <br>
+        <input type="checkbox" name="menu[]" value="Çay|15"> Çay - 15₺ <br>
+        <input type="checkbox" name="menu[]" value="Türk Kahvesi|30"> Türk Kahvesi - 30₺ <br>
+
+        <h2>Tatlılar</h2>
+        <input type="checkbox" name="menu[]" value="Baklava|50"> Baklava - 50₺ <br>
+        <input type="checkbox" name="menu[]" value="Künefe|60"> Künefe - 60₺ <br>
+        <input type="checkbox" name="menu[]" value="Sütlaç|40"> Sütlaç - 40₺ <br>
+
+        <h3>Masa Numarası</h3>
+        <input type="number" name="masa_no" placeholder="Masa No" required><br><br>
+
+        <input type="submit" name="submit" value="Siparişi Gönder">
+    </form>
+</body>
+</html>
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+aşçı sayfası:
+
+<?php
+if (isset($_POST['submit'])) {
+    $menu_items = $_POST['menu'];
+    $masa_no = $_POST['masa_no'];
+
+    // Siparişi kaydediyoruz (Bu örnekte session kullanılıyor)
+    session_start();
+    if (!isset($_SESSION['siparisler'])) {
+        $_SESSION['siparisler'] = [];
+    }
+
+    $siparis = [
+        "masa_no" => $masa_no,
+        "menu" => $menu_items
+    ];
+    $_SESSION['siparisler'][] = $siparis;
+
+    echo "<h2>Sipariş Aşçıya İletildi</h2>";
+    echo "<p><a href='asci.php'>Aşçı Sayfasına Git</a></p>";
+} else {
+    session_start();
+    echo "<h1>Aşçı Paneli</h1>";
+
+    if (!empty($_SESSION['siparisler'])) {
+        foreach ($_SESSION['siparisler'] as $index => $siparis) {
+            echo "<h2>Masa No: " . $siparis['masa_no'] . "</h2>";
+            echo "<ul>";
+            foreach ($siparis['menu'] as $item) {
+                list($name, $price) = explode('|', $item);
+                echo "<li>$name - $price₺</li>";
+            }
+            echo "</ul>";
+            echo "<hr>";
+        }
+    } else {
+        echo "<p>Henüz sipariş yok.</p>";
+    }
+}
+?>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+admin_login.php:
+
+<?php
+session_start();
+$conn = new mysqli('localhost', 'root', '', 'yemek_sistemi');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+
+    $query = "SELECT * FROM admin WHERE username='$username' AND password='$password'";
+    $result = $conn->query($query);
+
+    if ($result->num_rows > 0) {
+        $_SESSION['admin'] = $username;
+        header('Location: admin_panel.php');
+    } else {
+        $error = "Hatalı kullanıcı adı veya şifre!";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Giriş</title>
+</head>
+<body>
+    <h1>Admin Girişi</h1>
+    <form method="POST" action="">
+        <label>Kullanıcı Adı:</label><br>
+        <input type="text" name="username" required><br><br>
+        <label>Şifre:</label><br>
+        <input type="password" name="password" required><br><br>
+        <input type="submit" value="Giriş Yap">
+    </form>
+    <?php if (isset($error)) echo "<p style='color:red;'>$error</p>"; ?>
+</body>
+</html>
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+admin_panel.php:
+
+<?php
+session_start();
+if (!isset($_SESSION['admin'])) {
+    header('Location: admin_login.php');
+    exit();
+}
+
+$conn = new mysqli('localhost', 'root', '', 'yemek_sistemi');
+
+// Yemek ekleme
+if (isset($_POST['add'])) {
+    $kategori = $_POST['kategori'];
+    $isim = $_POST['isim'];
+    $fiyat = $_POST['fiyat'];
+    $conn->query("INSERT INTO yemekler (kategori, isim, fiyat) VALUES ('$kategori', '$isim', $fiyat)");
+}
+
+// Yemek silme
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $conn->query("DELETE FROM yemekler WHERE id=$id");
+}
+
+// Yemek güncelleme
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $kategori = $_POST['kategori'];
+    $isim = $_POST['isim'];
+    $fiyat = $_POST['fiyat'];
+    $conn->query("UPDATE yemekler SET kategori='$kategori', isim='$isim', fiyat=$fiyat WHERE id=$id");
+}
+
+$yemekler = $conn->query("SELECT * FROM yemekler");
+?>
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli</title>
+</head>
+<body>
+    <h1>Admin Paneli</h1>
+    <a href="admin_logout.php">Çıkış Yap</a>
+    <h2>Yemek Ekle</h2>
+    <form method="POST" action="">
+        <label>Kategori:</label><br>
+        <input type="text" name="kategori" required><br>
+        <label>Yemek İsmi:</label><br>
+        <input type="text" name="isim" required><br>
+        <label>Fiyat:</label><br>
+        <input type="number" step="0.01" name="fiyat" required><br>
+        <input type="submit" name="add" value="Ekle">
+    </form>
+
+    <h2>Yemek Listesi</h2>
+    <table border="1">
+        <tr>
+            <th>Kategori</th>
+            <th>İsim</th>
+            <th>Fiyat</th>
+            <th>İşlemler</th>
+        </tr>
+        <?php while ($row = $yemekler->fetch_assoc()): ?>
+        <tr>
+            <form method="POST" action="">
+                <td><input type="text" name="kategori" value="<?= $row['kategori'] ?>"></td>
+                <td><input type="text" name="isim" value="<?= $row['isim'] ?>"></td>
+                <td><input type="number" step="0.01" name="fiyat" value="<?= $row['fiyat'] ?>"></td>
+                <td>
+                    <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                    <input type="submit" name="update" value="Güncelle">
+                    <a href="?delete=<?= $row['id'] ?>" onclick="return confirm('Silmek istediğinize emin misiniz?')">Sil</a>
+                </td>
+            </form>
+        </tr>
+        <?php endwhile; ?>
+    </table>
+</body>
+</html>
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+admin_logout.php:
+
+<?php
+session_start();
+session_destroy();
+header('Location: admin_login.php');
+exit();
+?>
+

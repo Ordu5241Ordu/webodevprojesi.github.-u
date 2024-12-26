@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Çorbalar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .category-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        
+        /* Hover efekti ile gölgeleme */
+        .category-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .category-card .card-body {
+            text-align: center;
+        }
+
+        .category-card .card-body h5 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        .price {
+            font-size: 1.25rem;
+            color: #28a745;
+            margin-top: 10px;
+        }
+
+        .category-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <h1 class="category-title">Çorbalar</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            <!-- Çorba Çeşitleri -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/mercimek.jpg" class="card-img-top" alt="Mercimek Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Mercimek Çorbası</h5>
+                        <p class="card-text">Klasik Türk mutfağının vazgeçilmezi.</p>
+                        <p class="price">20 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Mercimek Çorbası', 20)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/ezogelin.jpg" class="card-img-top" alt="Ezogelin Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Ezogelin Çorbası</h5>
+                        <p class="card-text">Bulgurlu ve baharatlı çorba.</p>
+                        <p class="price">22 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Ezogelin Çorbası', 22)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/tarhana.jpg" class="card-img-top" alt="Tarhana Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Tarhana Çorbası</h5>
+                        <p class="card-text">Ev yapımı doğal lezzet.</p>
+                        <p class="price">18 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Tarhana Çorbası', 18)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/domates.jpg" class="card-img-top" alt="Domates Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Domates Çorbası</h5>
+                        <p class="card-text">Kaşar peyniri ile servis edilir.</p>
+                        <p class="price">19 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Domates Çorbası', 19)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/yayla.jpg" class="card-img-top" alt="Yayla Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Yayla Çorbası</h5>
+                        <p class="card-text">Naneli ve yoğurtlu ferah bir tat.</p>
+                        <p class="price">20 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Yayla Çorbası', 20)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/iskembe.jpg" class="card-img-top" alt="İşkembe Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">İşkembe Çorbası</h5>
+                        <p class="card-text">Bol sarımsak ve sirke ile servis edilir.</p>
+                        <p class="price">25 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('İşkembe Çorbası', 25)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/tavuksuyu.jpg" class="card-img-top" alt="Tavuk Suyu Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Tavuk Suyu Çorbası</h5>
+                        <p class="card-text">Sağlıklı ve lezzetli.</p>
+                        <p class="price">23 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Tavuk Suyu Çorbası', 23)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/mantar.jpg" class="card-img-top" alt="Mantar Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Mantar Çorbası</h5>
+                        <p class="card-text">Kremalı ve yoğun lezzet.</p>
+                        <p class="price">24 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Mantar Çorbası', 24)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/paca.jpg" class="card-img-top" alt="Paça Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Paça Çorbası</h5>
+                        <p class="card-text">Özel tarifle hazırlanır.</p>
+                        <p class="price">27 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Paça Çorbası', 27)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/brokoli.jpg" class="card-img-top" alt="Brokoli Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Brokoli Çorbası</h5>
+                        <p class="card-text">Vitamin deposu lezzet.</p>
+                        <p class="price">22 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Brokoli Çorbası', 22)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/sebze.jpg" class="card-img-top" alt="Sebze Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Sebze Çorbası</h5>
+                        <p class="card-text">Sağlıklı ve hafif.</p>
+                        <p class="price">21 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Sebze Çorbası', 21)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/balaban.jpg" class="card-img-top" alt="Balaban Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Balaban Çorbası</h5>
+                        <p class="card-text">Yüksek proteinli ve lezzetli bir çorba.</p>
+                        <p class="price">26 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Balaban Çorbası', 26)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/balikhafif.jpg" class="card-img-top" alt="Balık Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Balık Çorbası</h5>
+                        <p class="card-text">Lezzetli ve besleyici balık çorbası.</p>
+                        <p class="price">28 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Balık Çorbası', 28)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/peynir.jpg" class="card-img-top" alt="Peynir Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Peynir Çorbası</h5>
+                        <p class="card-text">Sıcak ve lezzetli peynir çorbası.</p>
+                        <p class="price">25 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Peynir Çorbası', 25)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/saray.jpg" class="card-img-top" alt="Saray Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Saray Çorbası</h5>
+                        <p class="card-text">Farklı baharatlar ve kremalı dokusu ile eşsiz bir lezzet.</p>
+                        <p class="price">30 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Saray Çorbası', 30)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/bulgur.jpg" class="card-img-top" alt="Bulgur Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Bulgur Çorbası</h5>
+                        <p class="card-text">Bulgur, sebzeler ve baharatlarla hazırlanan nefis bir çorba.</p>
+                        <p class="price">21 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Bulgur Çorbası', 21)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/bulgur.jpg" class="card-img-top" alt="Lahana Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Lahana Çorbası</h5>
+                        <p class="card-text">Lahana, sebzeler ve baharatlarla hazırlanan nefis bir çorba.</p>
+                        <p class="price">21 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Lahana çorbası', 21)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/kabak.jpg" class="card-img-top" alt="Kabak Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Kabak Çorbası</h5>
+                        <p class="card-text"> Doğal olan lezzetli Kabak ve İnanılmaz kremalı Mükemmel lezzet.          </p>
+                        <p class="price">23 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Kabak Çorbası', 23)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/sogan.jpg" class="card-img-top" alt="Soğan Çorbası">
+                    <div class="card-body">
+                        <h5 class="card-title">Soğan Çorbası</h5>
+                        <p class="card-text">Karamelize soğan ve peynirli sıcak çorba.</p>
+                        <p class="price">22 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Soğan Çorbası', 22)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Sepet verisi
+        let cart = [];
+
+        // Masa numarasını kontrol et
+        let tableNumber = localStorage.getItem('tableNumber');
+
+        // Sepete ekleme fonksiyonu
+        function addToCart(item, price) {
+            if (!tableNumber) {
+                alert('Lütfen masa numarasını girin!');
+                return;
+            }
+
+            cart = JSON.parse(localStorage.getItem('cart_' + tableNumber)) || [];
+            const cartItem = { name: item, price: price };
+            cart.push(cartItem);
+
+            localStorage.setItem('cart_' + tableNumber, JSON.stringify(cart));
+            alert(item + ' sepete eklendi!');
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tatlılar</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .category-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        
+        /* Hover efekti ile gölgeleme */
+        .category-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);  /* Kartın etrafında daha büyük gölge */
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .category-card .card-body {
+            text-align: center;
+        }
+
+        .category-card .card-body h5 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        .price {
+            font-size: 1.25rem;
+            color: #28a745;
+            margin-top: 10px;
+        }
+
+        .category-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <h1 class="category-title">Salatalar</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+    
+            <!-- Cacık -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/cacik.jpg" class="card-img-top" alt="Cacık">
+                    <div class="card-body">
+                        <h5 class="card-title">Cacık</h5>
+                        <p class="card-text">Serinletici yoğurtlu cacık.</p>
+                        <p class="price">15 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Cacık', 15)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Gavurdağı Salatası -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/gavurdag.jpg" class="card-img-top" alt="Gavurdağı Salatası">
+                    <div class="card-body">
+                        <h5 class="card-title">Gavurdağı Salatası</h5>
+                        <p class="card-text">Cevizli ve nar ekşili enfes salata.</p>
+                        <p class="price">20 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Gavurdağı Salatası', 20)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Tabbouleh -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/tabbouleh.jpg" class="card-img-top" alt="Tabbouleh">
+                    <div class="card-body">
+                        <h5 class="card-title">Tabbouleh</h5>
+                        <p class="card-text">Orta Doğu'nun favori salatası.</p>
+                        <p class="price">18 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Tabbouleh', 18)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Yeşil Salata -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/yesilsalata.jpg" class="card-img-top" alt="Yeşil Salata">
+                    <div class="card-body">
+                        <h5 class="card-title">Yeşil Salata</h5>
+                        <p class="card-text">Taptaze sebzelerle hazırlanan klasik salata.</p>
+                        <p class="price">12 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Yeşil Salata', 12)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Çoban Salatası -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/cobansalata.jpg" class="card-img-top" alt="Çoban Salatası">
+                    <div class="card-body">
+                        <h5 class="card-title">Çoban Salatası</h5>
+                        <p class="card-text">Domates, salatalık ve biberin muhteşem uyumu.</p>
+                        <p class="price">14 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Çoban Salatası', 14)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Ton Balıklı Salata -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/tonbalikli.jpg" class="card-img-top" alt="Ton Balıklı Salata">
+                    <div class="card-body">
+                        <h5 class="card-title">Ton Balıklı Salata</h5>
+                        <p class="card-text">Sağlıklı ve lezzetli bir seçenek.</p>
+                        <p class="price">25 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Ton Balıklı Salata', 25)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Patates Salatası -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/patatessalatasi.jpg" class="card-img-top" alt="Patates Salatası">
+                    <div class="card-body">
+                        <h5 class="card-title">Patates Salatası</h5>
+                        <p class="card-text">Haşlanmış patatesle hazırlanmış nefis bir lezzet.</p>
+                        <p class="price">10 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Patates Salatası', 10)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Amerikan Salatası -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/amerikansalatasi.jpg" class="card-img-top" alt="Amerikan Salatası">
+                    <div class="card-body">
+                        <h5 class="card-title">Amerikan Salatası</h5>
+                        <p class="card-text">Mayonezle lezzetlendirilmiş enfes salata.</p>
+                        <p class="price">18 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Amerikan Salatası', 18)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Mevsim Salatası -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/mevsimsalatasi.jpg" class="card-img-top" alt="Mevsim Salatası">
+                    <div class="card-body">
+                        <h5 class="card-title">Mevsim Salatası</h5>
+                        <p class="card-text">Her mevsime uygun taze sebzeler.</p>
+                        <p class="price">15 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Mevsim Salatası', 15)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Rus Salatası -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/russalatasi.jpg" class="card-img-top" alt="Rus Salatası">
+                    <div class="card-body">
+                        <h5 class="card-title">Rus Salatası</h5>
+                        <p class="card-text">Haşlanmış sebzelerle hazırlanan nefis bir tat.</p>
+                        <p class="price">17 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Rus Salatası', 17)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Nar Ekşili Salata -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/narekşilisalata.jpg" class="card-img-top" alt="Nar Ekşili Salata">
+                    <div class="card-body">
+                        <h5 class="card-title">Nar Ekşili Salata</h5>
+                        <p class="card-text">Nar ekşisinin enfes lezzetiyle taçlanmış.</p>
+                        <p class="price">22 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Nar Ekşili Salata', 22)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Akdeniz Salatası -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/akdenizsalatasi.jpg" class="card-img-top" alt="Akdeniz Salatası">
+                    <div class="card-body">
+                        <h5 class="card-title">Akdeniz Salatası</h5>
+                        <p class="card-text">Akdeniz sebzeleriyle hazırlanan sağlıklı bir seçenek.</p>
+                        <p class="price">20 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Akdeniz Salatası', 20)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fattoush -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/fattoush.jpg" class="card-img-top" alt="Fattoush">
+                    <div class="card-body">
+                        <h5 class="card-title">Fattoush</h5>
+                        <p class="card-text">Fırınlanmış ekmek parçalarıyla yapılan lezzetli salata.</p>
+                        <p class="price">19 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Fattoush', 19)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kısır -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/kisir.jpg" class="card-img-top" alt="Kısır">
+                    <div class="card-body">
+                        <h5 class="card-title">Kısır</h5>
+                        <p class="card-text">Bulgur, domates, salatalık ve baharatlarla yapılan nefis salata.</p>
+                        <p class="price">16 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Kısır', 16)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Sepet verisi
+        let cart = [];
+
+        // Masa numarasını kontrol et
+        let tableNumber = localStorage.getItem('tableNumber');
+
+        // Sepete ekleme fonksiyonu
+        function addToCart(item, price) {
+            // Masa numarası kontrol et
+            if (!tableNumber) {
+                alert('Lütfen masa numarasını girin!');
+                return;
+            }
+
+            // Masa numarasına özel sepeti al
+            cart = JSON.parse(localStorage.getItem('cart_' + tableNumber)) || [];
+
+            // Sepete öğe ekle
+            const cartItem = { name: item, price: price };
+            cart.push(cartItem);
+
+            // Yeni sepeti kaydet
+            localStorage.setItem('cart_' + tableNumber, JSON.stringify(cart));
+
+            alert(item + ' sepete eklendi!');
+        }
+    </script>
+
+</body>
+</html>

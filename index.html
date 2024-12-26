@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yemek Menüsü</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .category-card {
+            cursor: pointer;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+        .category-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .category-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .category-card .card-body {
+            text-align: center;
+        }
+        .category-card .card-body h5 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+        .category-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Sepet ikonu */
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #28a745;
+            color: white;
+            border-radius: 50%;
+            padding: 15px;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Masa numarası girişi */
+        .table-number-selector {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        /* Restoran Başlığı */
+        .restaurant-name {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Restoran İsmi -->
+    <div class="restaurant-name">Lezzet Durağı Restoranı</div>
+
+    <!-- Sepet İkonu -->
+    <div class="cart-icon" onclick="window.location.href='sepet.html'">
+        <i class="fas fa-shopping-cart"></i>
+    </div>
+
+    <!-- Masa Numarası Girişi -->
+    <div class="table-number-selector">
+        <label for="tableNumber" class="form-label">Masa Numarası:</label>
+        <input type="text" id="tableNumber" class="form-control" placeholder="Masa numarasını girin" onchange="setTableNumber()">
+    </div>
+
+    <div class="container my-5">
+        <h1 class="category-title">Yemek Menüsü</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            <!-- Çorbalar -->
+            <div class="col">
+                <div class="card category-card" onclick="redirectToPage('corbalar.html')">
+                    <img src="yemek/ykvwebsite2.webp" class="card-img-top" alt="Çorbalar">
+                    <div class="card-body">
+                        <h5 class="card-title">Çorbalar</h5>
+                        <p class="card-text">Lezzetli ve sağlıklı çorbalar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Yemekler -->
+            <div class="col">
+                <div class="card category-card" onclick="redirectToPage('yemekler.html')">
+                    <img src="yemek/yemek-cesitleri.jpg" class="card-img-top" alt="Yemekler">
+                    <div class="card-body">
+                        <h5 class="card-title">Yemekler</h5>
+                        <p class="card-text">Zengin yemek çeşitleri.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Salatalar -->
+            <div class="col">
+                <div class="card category-card" onclick="redirectToPage('salatalar.html')">
+                    <img src="yemek/8-salata-tarifi-930x620.webp" class="card-img-top" alt="Salatalar">
+                    <div class="card-body">
+                        <h5 class="card-title">Salatalar</h5>
+                        <p class="card-text">Fresk ve lezzetli salatalar.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tatlılar -->
+            <div class="col">
+                <div class="card category-card" onclick="redirectToPage('tatlilar.html')">
+                    <img src="yemek/tatli-cesitleri.jpg" class="card-img-top" alt="Tatlılar">
+                    <div class="card-body">
+                        <h5 class="card-title">Tatlılar</h5>
+                        <p class="card-text">Tatlılarla damağınızı şenlendirin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İçecekler -->
+            <div class="col">
+                <div class="card category-card" onclick="redirectToPage('icecekler-kategorisi.html')">
+                    <img src="yemek/soğuk-sıcak-içecek.jfif" class="card-img-top" alt="İçecekler">
+                    <div class="card-body">
+                        <h5 class="card-title">İçecekler</h5>
+                        <p class="card-text">Sıcak ve soğuk içecek çeşitleri.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Masa numarası girildiğinde kaydetme
+        function setTableNumber() {
+            let tableNumber = document.getElementById('tableNumber').value;
+            if (tableNumber) {
+                localStorage.setItem('tableNumber', tableNumber);
+                alert('Masa numarası kaydedildi: ' + tableNumber);
+            }
+        }
+
+        // Sepet sayfasına gitme, masa numarası kontrolü
+        function redirectToPage(page) {
+            let tableNumber = localStorage.getItem('tableNumber');
+            if (!tableNumber) {
+                alert('Lütfen masa numarasını girin!');
+            } else {
+                window.location.href = page;
+            }
+        }
+		
+		function addToCart(item, price) {
+    // Sepete ürün eklerken, ürünün adı ve fiyatını kaydediyoruz
+    const cartItem = { name: item, price: price };
+    cart.push(cartItem);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(item + ' sepete eklendi!');
+    updateCart(); // Sepeti güncelle
+}
+
+    </script>
+
+</body>
+</html>

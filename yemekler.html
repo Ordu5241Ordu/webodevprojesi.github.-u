@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yemekler</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .category-card {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .category-card:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .category-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .category-card .card-body {
+            text-align: center;
+        }
+        .category-card .card-body h5 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+        .category-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .price {
+            font-size: 1.25rem;
+            color: #28a745;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container my-5">
+        <h1 class="category-title">Yemekler</h1>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            <!-- Adana Kebap -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/adana-kebap.jpg" class="card-img-top" alt="Adana Kebap">
+                    <div class="card-body">
+                        <h5 class="card-title">Adana Kebap</h5>
+                        <p class="card-text">Acılı Adana kebap.</p>
+                        <p class="price">45 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Adana Kebap', 45)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Döner -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/doner.jpg" class="card-img-top" alt="Döner">
+                    <div class="card-body">
+                        <h5 class="card-title">Döner</h5>
+                        <p class="card-text">Lezzetli döner, ekmek arası veya pilav üstü.</p>
+                        <p class="price">35 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Döner', 35)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kısır -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/kisir.jpg" class="card-img-top" alt="Kısır">
+                    <div class="card-body">
+                        <h5 class="card-title">Kısır</h5>
+                        <p class="card-text">Yazın vazgeçilmezi, nefis kısır.</p>
+                        <p class="price">25 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Kısır', 25)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Çörek -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/corek.jpg" class="card-img-top" alt="Çörek">
+                    <div class="card-body">
+                        <h5 class="card-title">Çörek</h5>
+                        <p class="card-text">Fırından yeni çıkmış sıcak çörek.</p>
+                        <p class="price">15 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Çörek', 15)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karnıyarık -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/karniyarik.jpg" class="card-img-top" alt="Karnıyarık">
+                    <div class="card-body">
+                        <h5 class="card-title">Karnıyarık</h5>
+                        <p class="card-text">Etli ve sebzeli nefis karnıyarık.</p>
+                        <p class="price">40 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Karnıyarık', 40)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kuymak -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/kuymak.jpg" class="card-img-top" alt="Kuymak">
+                    <div class="card-body">
+                        <h5 class="card-title">Kuymak</h5>
+                        <p class="card-text">Karadeniz'in meşhur kuymak yemeği.</p>
+                        <p class="price">30 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Kuymak', 30)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İskender -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/iskender.jpg" class="card-img-top" alt="İskender">
+                    <div class="card-body">
+                        <h5 class="card-title">İskender</h5>
+                        <p class="card-text">Köfteli ve dönerli iskender.</p>
+                        <p class="price">50 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('İskender', 50)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lahmacun -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/lahmacun.jpg" class="card-img-top" alt="Lahmacun">
+                    <div class="card-body">
+                        <h5 class="card-title">Lahmacun</h5>
+                        <p class="card-text">Lezzetli lahmacun.</p>
+                        <p class="price">20 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Lahmacun', 20)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Börek -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/borek.jpg" class="card-img-top" alt="Börek">
+                    <div class="card-body">
+                        <h5 class="card-title">Börek</h5>
+                        <p class="card-text">Sıcak ve çıtır börek.</p>
+                        <p class="price">22 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Börek', 22)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mantı -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/manti.jpg" class="card-img-top" alt="Mantı">
+                    <div class="card-body">
+                        <h5 class="card-title">Mantı</h5>
+                        <p class="card-text">Ev yapımı mantı.</p>
+                        <p class="price">35 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Mantı', 35)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pide -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/pide.jpg" class="card-img-top" alt="Pide">
+                    <div class="card-body">
+                        <h5 class="card-title">Pide</h5>
+                        <p class="card-text">Lezzetli ve sıcak pide.</p>
+                        <p class="price">28 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Pide', 28)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Çılbır -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/cilbir.jpg" class="card-img-top" alt="Çılbır">
+                    <div class="card-body">
+                        <h5 class="card-title">Çılbır</h5>
+                        <p class="card-text">Yoğurtlu ve yumurtalı nefis çılbır.</p>
+                        <p class="price">18 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Çılbır', 18)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kuzu Tandir -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/kuzu-tandir.jpg" class="card-img-top" alt="Kuzu Tandır">
+                    <div class="card-body">
+                        <h5 class="card-title">Kuzu Tandır</h5>
+                        <p class="card-text">Nefis kuzu tandır.</p>
+                        <p class="price">60 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Kuzu Tandır', 60)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fırın Tavuk -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/firin-tavuk.jpg" class="card-img-top" alt="Fırın Tavuk">
+                    <div class="card-body">
+                        <h5 class="card-title">Fırın Tavuk</h5>
+                        <p class="card-text">Fırında pişmiş tavuk.</p>
+                        <p class="price">40 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Fırın Tavuk', 40)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kuzu Şiş -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/kuzu-sis.jpg" class="card-img-top" alt="Kuzu Şiş">
+                    <div class="card-body">
+                        <h5 class="card-title">Kuzu Şiş</h5>
+                        <p class="card-text">Lezzetli kuzu şiş, ızgarada pişirilmiş.</p>
+                        <p class="price">55 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Kuzu Şiş', 55)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fırın Makarna -->
+            <div class="col">
+                <div class="card category-card">
+                    <img src="yemek/firin-makarna.jpg" class="card-img-top" alt="Fırın Makarna">
+                    <div class="card-body">
+                        <h5 class="card-title">Fırın Makarna</h5>
+                        <p class="card-text">Fırında pişmiş nefis makarna.</p>
+                        <p class="price">32 TL</p>
+                        <button class="btn btn-primary" onclick="addToCart('Fırın Makarna', 32)">Sepete Ekle</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Sepet verisi
+        let cart = [];
+        
+        // Masa numarasını kontrol et
+        let tableNumber = localStorage.getItem('tableNumber');
+
+        // Sepete ekleme fonksiyonu
+        function addToCart(item, price) {
+            // Masa numarası kontrol et
+            if (!tableNumber) {
+                alert('Lütfen masa numarasını girin!');
+                return;
+            }
+
+            // Masa numarasına özel sepeti al
+            cart = JSON.parse(localStorage.getItem('cart_' + tableNumber)) || [];
+
+            // Sepete öğe ekle (yemek adı ve fiyat)
+            cart.push({ name: item, price: price });
+
+            // Yeni sepeti kaydet
+            localStorage.setItem('cart_' + tableNumber, JSON.stringify(cart));
+
+            alert(item + ' sepete eklendi!');
+        }
+    </script>
+
+</body>
+</html>
